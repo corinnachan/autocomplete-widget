@@ -1,0 +1,19 @@
+{
+  "name": "pokedex",
+  "version": "1.0.0",
+  "description": "Pokedex for autocomplete widget project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/corinnachan/autocomplete-widget.git"
+  },
+  "author": "corinnachan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/corinnachan/autocomplete-widget/issues"
+  },
+  "homepage": "https://github.com/corinnachan/autocomplete-widget#readme"
+}
