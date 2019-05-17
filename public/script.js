@@ -1,6 +1,6 @@
 
 let input = document.getElementById('inputBox');
-let dataList = document.getElementById('dataList');
+let dataList = document.getElementById('json-datalist');
 let dropdown = document.getElementById('dropdown');
 
 /* Script to get list of pokemon when typing in input box */
@@ -27,7 +27,7 @@ function eventHandler (result) {
   input.addEventListener('input', function (e) {
     var newValue = e.target.value;
     createList(result, newValue);
-  })
+  });
 }
 
 /* Function for creating output */
@@ -37,7 +37,7 @@ function createList(result, x) {
     if (x == result.pokemon[i].name) {
       var outputType = result.pokemon[i].type[0];
       var poketype = document.getElementById('poketype');
-      poketype.textContent = outputType;
+      poketype.innerHTML.textContent = outputType;
     }
   }
 }
