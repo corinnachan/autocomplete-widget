@@ -1,41 +1,40 @@
 var fs = require('fs');
 var path = require('path');
 
+const handlerHomepage = 
 
-function handler (request, response) {
-  var endpoint = request.url;
+  function (request, response) {
+    var endpoint = request.url;
+    console.log(endpoint);
 
-/* Setting up response for endpoint / */
+  /* Setting up response for endpoint */
+      response.writeHead(200, {'Content-Type': 'text/html'});
 
-  if (endpoint === '/') {
-    response.writeHead(200, {'Content-Type': 'text/html'});
+      fs.readFile(path.join(__dirname, '..', 'public/index.html'), function (error, file) {
+        if (error) {
+          console.log(error);
+          return;
+        } else {
+          console.log(endpoint);
+        }
 
-    fs.readFile(path.join(__dirname, '..', 'public/index.html'), function (error, file) {
-      if (error) {
-        console.log(error);
-        return;
-      } else {
-        console.log(endpoint);
-      }
-
-    response.end(file);
-    })
+      response.end(file);
+      })
+    }
 
 /* Setting up response for all other endpoints */
 
-  } else {
 
-    response.writeHead(200);
-    fs.readFile(path.join(__dirname, '..', 'public') + endpoint, function (error, file) {
-      if (error) {
-        console.log(error);
-        return;
-      }
-    response.end(file);
-    })
+const handlerNonHomepage = 
+    function (request, response) {
+      response.writeHead(200);
+      response.write('404 This page does not exist');
+      response.end();
+    }
     
-  }
+    
 
-}
-
-module.exports = handler;
+module.exports = {
+  handlerHomepage,
+  handlerNonHomepage,
+};
