@@ -1,43 +1,40 @@
+// document.onload = function () {
+//   let input = document.getElementById('inputBox');
+//
+//   input.onkeydown = function () {
+//     console.log(input.textContent);
+//   }
+// }
 
 let input = document.getElementById('inputBox');
 let dataList = document.getElementById('json-datalist');
-let dropdown = document.getElementById('dropdown');
 
-/* Script to get list of pokemon when typing in input box */
 
-fetchData(function (result) {
-  createOption(result);
-  eventHandler(result);
-});
+input.addEventListener('input', function(e) {
+  e.preventDefault();
+  const inputValue = e.target.value;
+  const sendUrl = `/autocomplete?pokemon=${inputValue}`;
 
-/* Create list of options for datalist tag */
+  var xhr = new XMLHttpRequest();
 
-function createOption (result) {
-  for (i in result.pokemon) {
-    var option = document.createElement('option');
-    var text = result.pokemon[i].name;
-    option.value = text;
-    dropdown.appendChild(option);
-  }
-}
+    xhr.onreadystatechange = function () {
+      if (xhr.status == 200 && xhr.readyState == 4) {
+        const response = JSON.parse(xhr.response);
+        dataList.innerHTML = '';
 
-/* Event handler for inputs in input box */
+        for (var i = 0; i < response.length; i++) {
+          const optionElem = document.createElement('option');
+          optionElem.textContent = response[i];
+          dataList.appendChild(optionElem);
+        }
+      }
 
-function eventHandler (result) {
-  input.addEventListener('input', function (e) {
-    var newValue = e.target.value;
-    createList(result, newValue);
+    };
+
+    xhr.open('GET',sendUrl, true);
+    xhr.send();
   });
-}
 
-/* Function for creating output */
-
-function createList(result, x) {
-  for (i in result.pokemon) {
-    if (x == result.pokemon[i].name) {
-      var outputType = result.pokemon[i].type[0];
-      var poketype = document.getElementById('poketype');
-      poketype.innerHTML.textContent = outputType;
-    }
-  }
-}
+//check textContent and fix it
+//make ajax request where pass search input as query parameter
+//render result on the page
