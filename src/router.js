@@ -14,6 +14,11 @@ let router = function (request, response) {
         script = fs.readFileSync(filePath, "utf8");
         response.write(script);
         response.end();
+    } else if (endpoint === '/style.css'){
+        const cssPath = path.join(__dirname, "..", "public", "style.css");
+        css = fs.readFileSync(cssPath, "utf8");
+        response.write(css);
+        response.end();
     } else {
         handler.handlerNonHomepage (request, response);
     }
