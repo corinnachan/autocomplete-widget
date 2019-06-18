@@ -23,5 +23,5 @@ The short truth: trying to build this alone within the normal FAC project timefr
 
 ## Stretch Goals / Further Improvements :runner:
 
-1. Applying CSS to the page
+1. Applying more CSS to the page
 2. Have another section on the page which returns a property related to the selected Pokemon, like a true Pokedex!
